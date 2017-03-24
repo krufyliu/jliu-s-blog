@@ -3,3 +3,4 @@ env/
 *.swp
 *.swo
 *.log
+local_config.py
