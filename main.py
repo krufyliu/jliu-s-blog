@@ -7,9 +7,7 @@ app = Flask(__name__)
 
 app.config.from_object(config)
 
-@app.route('/')
-def home():
-    return '<h1>Hello World!</h1>'
+import views
 
 if __name__ == '__main__':
     # Entry the application 
