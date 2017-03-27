@@ -1,6 +1,7 @@
 # coding: utf8
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from hashlib import md5
 
 db = SQLAlchemy()
 
@@ -20,9 +21,19 @@ class User(db.Model):
         lazy='dynamic'
     )
 
-    def __init__(self, username, email):
+    def __init__(self, username, email, password):
         self.username = username
         self.email = email
+        self.password = self.generate_password_hash(password)
+
+    def validate_password(self, password):
+        return self.generate_password_hash(password) == self.password
+    
+    @classmethod
+    def generate_password_hash(cls, password):
+        hash = md5()
+        hash.update(password)
+        return hash.hexdigest()
 
     def __str__(self):
         return '<User `{}`>'.format(self.username)

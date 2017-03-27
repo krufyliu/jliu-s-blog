@@ -1,8 +1,8 @@
 from os import path
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, flash, redirect, url_for
 from sqlalchemy import func
 from jliusblog.models import db, Post, Comment, Tag, posts_tags
-from jliusblog.forms import CommentForm
+from jliusblog.forms import CommentForm, PostNewForm
 
 blog_blueprint = Blueprint(
     'blog', 
@@ -48,3 +48,14 @@ def create(post_id):
         db.session.commit()
     recent_posts, top_tags = sidebar_data()
     return render_template('posts/show.html', **locals())
+
+@blog_blueprint.route('/new_post', methods=['GET', 'POST'])
+def new_post():
+    form = PostNewForm()
+    if form.validate_on_submit():
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post was created successfully', category='success')
+        return redirect(url_for('.home'))
+    
+    return render_template('posts/create.html', form=form)

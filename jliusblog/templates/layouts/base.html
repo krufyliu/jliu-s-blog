@@ -55,6 +55,18 @@
         <h1><a href="">Jliu's Blog</a></h1>
         <p>Welcome to jliu's blog</p> 
       </div>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{category}} alert-dismissible" data-dismiss="alert" aria-label="Clse">
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       {% block body %}
       {% endblock %}
     </div>
@@ -63,5 +75,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>-->
     <scprit href="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></scprit>
+    {% block js %}
+    {% endblock %}
   </body>
 </html>
