@@ -12,11 +12,11 @@
         <div class="row">
           <div class="col-lg-12">
             {{ post.text | truncate(255) | safe }}
-            <a href="">Read More</a>
+            <a href="{{ url_for('.show', post_id=post.id) }}">Read More</a>
           </div>
         </div>
       {% endfor %}
-      {{ render_pagination(posts, 'home') }}
+      {{ render_pagination(posts, '.home') }}
     </div>
     <div class="col-lg-3">
       <div class="row">

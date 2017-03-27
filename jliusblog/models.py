@@ -1,9 +1,8 @@
 # coding: utf8
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from main import app
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 class User(db.Model):

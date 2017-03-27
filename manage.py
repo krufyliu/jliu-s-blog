@@ -3,8 +3,8 @@
 # import Flask Script object
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from main import app
-import models
+from jliusblog import app
+from jliusblog import models
 
 # Init manager object via app object
 manager = Manager(app)
